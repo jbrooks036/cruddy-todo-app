@@ -1,0 +1,20 @@
+{
+  "name": "cruddy-todo-app",
+  "homepage": "https://github.com/jbrooks036/cruddy-todo-app",
+  "authors": [
+    "jbrooks036 <joannbrooks036@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
