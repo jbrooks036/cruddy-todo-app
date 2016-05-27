@@ -15,6 +15,23 @@ $(() => {
     $('tbody').append(row)
   }
 
+  // READ: GET data from firebase and display in table
+  const getTasks = () => {
+    $.get(`${API_URL}.json?auth=${token}`)
+      .done((data) => {
+        console.log("data = ", data)
+        if (data) {
+          // for (id in data) {
+          //    add ItemToTable(data[id])
+          // }
+
+          Object.keys(data).forEach((id) => {
+            addItemToTable(data[id], id)
+          })
+        }
+        //TODO:  handle completed tasks
+      })
+  }
   // CREATE:  form submit event to POST data to firebase
   $('.new form').submit(() => {
     // $.ajax({
@@ -95,8 +112,12 @@ $(() => {
     if (user) {
       //logged in
       $('.app').show()
-      token = user._lat
-      getTasks()
+
+
+      // 'user' is Firebase object, 'getToken' is FB method on that object
+      user.getToken()         // these 2 lines new for Firebase 3
+        .then(t => token = t)  // these 2 lines new for Firebase 3
+        .then(getTasks)
     }else {
       // not logged in
       $('.login').show()
@@ -104,23 +125,6 @@ $(() => {
   })
 
   
-// READ: GET data from firebase and display in table
-  const getTasks = () => {
-    $.get(`${API_URL}.json?auth=${token}`)
-      .done((data) => {
-        console.log("data = ", data)
-        if (data) {
-          // for (id in data) {
-          //    add ItemToTable(data[id])
-          // }
-
-          Object.keys(data).forEach((id) => {
-            addItemToTable(data[id], id)
-          })
-        }
-        //TODO:  handle completed tasks
-      })
-  }
 })
 
 // CREATE(implement 2nd): form submit event to POST data to firebase
@@ -130,6 +134,12 @@ $(() => {
 // UPDATE(implement 4th): click event on complete to send PUT/PATCH to firebase
 
 // DELETE(implement 3rd): click event on delete to send DELETE to firebase 
+
+// LOGIN (5th)
+
+// LOGOUT (6th)
+
+// MULTIPLE USERS => MULTIPLE LISTS (7th)
 
 
 
