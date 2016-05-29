@@ -9,7 +9,7 @@ $(() => {
       <td>
         <button class="btn btn-success complete">Complete</button>
         <button class="btn btn-danger" delete>Delete</button>
-      </td>
+      // </td>
     </tr>`
 
     $('tbody').append(row)
@@ -33,22 +33,27 @@ $(() => {
       })
   }
   // CREATE:  form submit event to POST data to firebase
-  $('.new form').submit(() => {
+  $('.new form').submit((e) => {
     // $.ajax({
     //   url: API_URL.json, 
     //   method: 'POST',
     //   data: JSON.stringify({ task: 'I was posted!'}) // 'stringify' needed for Firebase
     // })
+
+    // console.log("new item to add = ", `${$('.add-item').val()}`);
+    alert( "Handler for .add-item() called." );
+    var newItem = $('.add-item').val();
+    console.log("new item to add = ", newItem);
+    var jsonString = JSON.stringify({ task: 'I was posted!' });
+
     // or use this instead: 
     $.post(`${API_URL}.json?auth=${token}`, 
       JSON.stringify({ task: 'I was posted!' })
     )
     // TODO:  Grab the form text
-    $('.add-item').on("submit", (e) => {
-      console.log("add-item button clicked")
-      alert( "Handler for .add-item() called." );
-      e.preventDefault();
-    })
+    
+    e.preventDefault();
+ 
     // TODO: Make this not refresh the page
   })
 
